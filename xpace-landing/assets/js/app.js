@@ -10,7 +10,6 @@ const LINKS = {
 }
 
 /* ===== Teachers data ===== */
-
 const TEACHERS = [
   { name: 'Alana Veiga', styles: ['Hip Hop'], ig: 'veigalanaa' },
   { name: 'Alisson Felipe', styles: ['Hip Hop'], ig: 'alissonfelipes', photo: 'assets/images/teachers/alissonfelipe.jpg' },
@@ -31,6 +30,7 @@ const TEACHERS = [
   { name: 'Ruan Santos', styles: ['Hip Hop'], ig: 'ruansanttoz' },
   { name: 'Samuel Maros', styles: ['Danças Urbanas'], ig: 'samuzek' },
 ];
+
 
 /* ===== Styles (Estilos de dança) ===== */
 const STYLES = [
@@ -105,6 +105,7 @@ if (tWrap){
     tWrap.appendChild(card)
   })
 }
+
 
 /* ===== Render Schedule ===== */
 const weekOrder=['seg','ter','qua','qui','sex','sab']
