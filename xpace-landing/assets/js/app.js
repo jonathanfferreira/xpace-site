@@ -13,19 +13,19 @@ const $ = (html) => { const t = document.createElement('template'); t.innerHTML 
 /* ===== Teachers data ===== */
 const TEACHERS = [
   { name: 'Alana Veiga', styles: ['Hip Hop'], ig: 'veigalanaa' },
-  { name: 'Alisson Felipe', styles: ['Hip Hop'], ig: 'alissonfelipes' },
+  { name: 'Alisson Felipe', styles: ['Hip Hop'], ig: 'alissonfelipes', photo: 'alissonfelipe.jpg' },
   { name: 'Alisson Morpheu', styles: ['Locking'], ig: 'alisson_morpheu' },
-  { name: 'Bianca Marcela', styles: ['Contemporâneo','Jazz'], ig: 'biancamarceela' },
-  { name: 'Dil', styles: ['Vogue','Jazz Funk','Waacking','Hip Hop','House'], ig: 'dilschulz' },
-  { name: 'Eduarda Rodrigues', styles: ['Jazz Funk','Heels'], ig: 'eduarda.r.l' },
-  { name: 'Engels', styles: ['Vogue','Waacking','Jazz Funk'], ig: 'engelsmatheus_' },
+  { name: 'Bianca Marcela', styles: ['Contemporâneo','Jazz'], ig: 'biancamarceela', photo: 'bianca.jpg' },
+  { name: 'Dil', styles: ['Vogue','Jazz Funk','Waacking','Hip Hop','House'], ig: 'dilschulz', photo: 'dil.jpg' },
+  { name: 'Eduarda Rodrigues', styles: ['Jazz Funk','Heels'], ig: 'eduarda.r.l', photo: 'eduarda.jpg' },
+  { name: 'Engels', styles: ['Vogue','Waacking','Jazz Funk'], ig: 'engelsmatheus_', photo: 'engels.jpg' },
   { name: 'Gus', styles: ['Waacking','Jazz Funk','House'], ig: 'gusjoesting' },
   { name: 'Guilherme Riku', styles: ['Acrobacias'], ig: 'guilhermeriku' },
   { name: 'Isis', styles: ['Hip Hop'], ig: 'isislkr' },
-  { name: 'Jhonney', styles: ['Hip Hop','Dancehall','Jazz Funk','Waacking'], ig: 'jhonney.xp' },
-  { name: 'Lóren Stefany', styles: ['Hip Hop','House'], ig: 'ftloren' },
-  { name: 'Lucas Maciel', styles: ['Dancehall'], ig: 'lucasmacieldx' },
-  { name: 'Marcelinho', styles: ['Hip Hop'], ig: 'marcelinho_hiphop' },
+  { name: 'Jhonney', styles: ['Hip Hop','Dancehall','Jazz Funk','Waacking'], ig: 'jhonney.xp', photo: 'jhonney.jpg' },
+  { name: 'Lóren Stefany', styles: ['Hip Hop','House'], ig: 'ftloren', photo: 'loren.jpg' },
+  { name: 'Lucas Maciel', styles: ['Dancehall'], ig: 'lucasmacieldx', photo: 'lucasmaciel.jpg' },
+  { name: 'Marcelinho', styles: ['Hip Hop'], ig: 'marcelinho_hiphop', photo: 'marcelinho.jpg' },
   { name: 'Natália Lessin', styles: ['Ritmos'], ig: 'nataliatflessin' },
   { name: 'Ruan Amorim', styles: ['Hip Hop','House'], ig: 'ruan_amrm' },
   { name: 'Ruan Santos', styles: ['Hip Hop'], ig: 'ruansanttoz' },
@@ -114,8 +114,9 @@ const HORARIOS = [
 const tWrap = el('#teachers-target')
 if (tWrap){
   TEACHERS.forEach(t => {
+    const imgSrc = t.photo ? `assets/images/teachers/${t.photo}` : `https://unavatar.io/instagram/${t.ig}`
     const card = $(`<li class="teacher-card reveal">
-      <img src="https://unavatar.io/instagram/${t.ig}" alt="Foto de ${t.name}">
+      <img src="${imgSrc}" alt="Foto de ${t.name}">
       <div class="info">
         <strong>${t.name}</strong>
         <div class="muted small">${t.styles.join(' • ')}</div>
