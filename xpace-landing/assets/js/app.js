@@ -161,7 +161,7 @@ const cta = h.reservado ? '' : `
 const y = el('#year'); if (y) y.textContent = new Date().getFullYear()
 
 // Preenche link do trial nos botões do hero, se existir
-const btnTrialHero = document.getElementById('btn-trial-hero');
+const btnTrialHero = el('#btn-trial-hero');
 if (btnTrialHero) btnTrialHero.href = LINKS.trial;
 
 
@@ -204,8 +204,6 @@ if (blobs.length){
   }, {passive:true})
 }
 
-const btnTrialHero = document.getElementById('btn-trial-hero');
-if (btnTrialHero) btnTrialHero.href = LINKS.trial;
 
 /* ===== Awards (premiações) ===== */
 const AWARDS = [
