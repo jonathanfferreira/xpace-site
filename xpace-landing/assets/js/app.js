@@ -1,78 +1,57 @@
+/* ===== Helpers ===== */
+const el = (sel) => document.querySelector(sel)
+const $$ = (sel) => Array.from(document.querySelectorAll(sel))
+const $ = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstChild }
+
 /* ===== Config ===== */
 const LINKS = {
   trial: 'https://agendamento.nextfit.com.br/f9b1ea53-0e0e-4f98-9396-3dab7c9fbff4',
   whats: 'https://wa.me/5547999463474?text=Ol%C3%A1!%20Quero%20informa%C3%A7%C3%B5es%20sobre%20matr%C3%ADculas%20na%20XPACE.&utm_source=xpace-static&utm_medium=whatsapp&utm_campaign=default'
 }
 
-
-/* ===== Helpers ===== */
-const el = (sel) => document.querySelector(sel)
-const $$ = (sel) => Array.from(document.querySelectorAll(sel))
-const $ = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstChild }
-
 /* ===== Teachers data ===== */
 const TEACHERS = [
   { name: 'Alana Veiga', styles: ['Hip Hop'], ig: 'veigalanaa' },
-  { name: 'Alisson Felipe', styles: ['Hip Hop'], ig: 'alissonfelipes' },
+  { name: 'Alisson Felipe', styles: ['Hip Hop'], ig: 'alissonfelipes', photo: 'assets/images/teachers/alissonfelipe.jpg' },
   { name: 'Alisson Morpheu', styles: ['Locking'], ig: 'alisson_morpheu' },
-  { name: 'Bianca Marcela', styles: ['Contemporâneo','Jazz'], ig: 'biancamarceela' },
-  { name: 'Dil', styles: ['Vogue','Jazz Funk','Waacking','Hip Hop','House'], ig: 'dilschulz' },
-  { name: 'Eduarda Rodrigues', styles: ['Jazz Funk','Heels'], ig: 'eduarda.r.l' },
-  { name: 'Engels', styles: ['Vogue','Waacking','Jazz Funk'], ig: 'engelsmatheus_' },
+  { name: 'Bianca Marcela', styles: ['Contemporâneo','Jazz'], ig: 'biancamarceela', photo: 'assets/images/teachers/bianca.jpg' },
+  { name: 'Dil', styles: ['Vogue','Jazz Funk','Waacking','Hip Hop','House'], ig: 'dilschulz', photo: 'assets/images/teachers/dil.jpg' },
+  { name: 'Eduarda Rodrigues', styles: ['Jazz Funk','Heels'], ig: 'eduarda.r.l', photo: 'assets/images/teachers/eduarda.jpg' },
+  { name: 'Engels', styles: ['Vogue','Waacking','Jazz Funk'], ig: 'engelsmatheus_', photo: 'assets/images/teachers/engels.jpg' },
   { name: 'Gus', styles: ['Waacking','Jazz Funk','House'], ig: 'gusjoesting' },
   { name: 'Guilherme Riku', styles: ['Acrobacias'], ig: 'guilhermeriku' },
   { name: 'Isis', styles: ['Hip Hop'], ig: 'isislkr' },
-  { name: 'Jhonney', styles: ['Hip Hop','Dancehall','Jazz Funk','Waacking'], ig: 'jhonney.xp' },
-  { name: 'Lóren Stefany', styles: ['Hip Hop','House'], ig: 'ftloren' },
-  { name: 'Lucas Maciel', styles: ['Dancehall'], ig: 'lucasmacieldx' },
-  { name: 'Marcelinho', styles: ['Hip Hop'], ig: 'marcelinho_hiphop' },
+  { name: 'Jhonney', styles: ['Hip Hop','Dancehall','Jazz Funk','Waacking'], ig: 'jhonney.xp', photo: 'assets/images/teachers/jhonney.jpg' },
+  { name: 'Lóren Stefany', styles: ['Hip Hop','House'], ig: 'ftloren', photo: 'assets/images/teachers/loren.jpg' },
+  { name: 'Lucas Maciel', styles: ['Dancehall'], ig: 'lucasmacieldx', photo: 'assets/images/teachers/lucasmaciel.jpg' },
+  { name: 'Marcelinho', styles: ['Hip Hop'], ig: 'marcelinho_hiphop', photo: 'assets/images/teachers/marcelinho.jpg' },
   { name: 'Natália Lessin', styles: ['Ritmos'], ig: 'nataliatflessin' },
   { name: 'Ruan Amorim', styles: ['Hip Hop','House'], ig: 'ruan_amrm' },
   { name: 'Ruan Santos', styles: ['Hip Hop'], ig: 'ruansanttoz' },
   { name: 'Samuel Maros', styles: ['Danças Urbanas'], ig: 'samuzek' },
-]
+];
+
 
 /* ===== Styles (Estilos de dança) ===== */
 const STYLES = [
-  {
-    slug:'waacking',
-    name:'Waacking',
+  { slug:'waacking', name:'Waacking',
     summary:'Nascido nas discotecas de Los Angeles nos anos 70, com foco em expressão, linhas de braços e musicalidade.',
-    refs: [
-      // depois trocamos por vídeos de referência oficiais que você aprovar
-      { type:'youtube', url:'https://www.youtube.com/watch?v=dQw4w9WgXcQ' }
-    ]
-  },
-  {
-    slug:'vogue',
-    name:'Vogue',
-    summary:'Estilo originado na Ballroom culture, com poses, linhas e categorias como Vogue Femme, Old Way e New Way.',
-    refs: []
-  },
-  {
-    slug:'jazz-funk',
-    name:'Jazz Funk',
-    summary:'Mistura elementos do jazz com vibe pop/comercial, ênfase em precisão e performance.',
-    refs: []
-  },
-  {
-    slug:'hip-hop',
-    name:'Hip Hop',
-    summary:'Cultura urbana com danças sociais, grooves, freestyle e foundations de rua.',
-    refs: []
-  },
-  {
-    slug:'dancehall',
-    name:'Dancehall',
-    summary:'Originário da Jamaica, passos e variações com forte identidade cultural.',
-    refs: []
-  },
-  {
-    slug:'house',
-    name:'House',
-    summary:'Criado nos clubes de Chicago/NY, com footwork, jacking e lofting.',
-    refs: []
-  }
+    refs: [] },
+  { slug:'vogue', name:'Vogue',
+    summary:'Originado na Ballroom culture, com poses, linhas e categorias como Vogue Femme, Old Way e New Way.',
+    refs: [] },
+  { slug:'jazz-funk', name:'Jazz Funk',
+    summary:'Mistura do jazz com a estética pop/comercial, ênfase em precisão e performance.',
+    refs: [] },
+  { slug:'hip-hop', name:'Hip Hop',
+    summary:'Cultura urbana com danças sociais, grooves, freestyle e foundations.',
+    refs: [] },
+  { slug:'dancehall', name:'Dancehall',
+    summary:'Da Jamaica, passos e variações com forte identidade cultural.',
+    refs: [] },
+  { slug:'house', name:'House',
+    summary:'Clubes de Chicago/NY, com footwork, jacking e lofting.',
+    refs: [] },
 ];
 
 const stylesWrap = document.getElementById('styles-target');
@@ -114,8 +93,9 @@ const HORARIOS = [
 const tWrap = el('#teachers-target')
 if (tWrap){
   TEACHERS.forEach(t => {
+    const imgSrc = t.photo ? `assets/images/teachers/${t.photo}` : `https://unavatar.io/instagram/${t.ig}`
     const card = $(`<li class="teacher-card reveal">
-      <img src="https://unavatar.io/instagram/${t.ig}" alt="Foto de ${t.name}">
+      <img src="${imgSrc}" alt="Foto de ${t.name}">
       <div class="info">
         <strong>${t.name}</strong>
         <div class="muted small">${t.styles.join(' • ')}</div>
@@ -125,6 +105,7 @@ if (tWrap){
     tWrap.appendChild(card)
   })
 }
+
 
 /* ===== Render Schedule ===== */
 const weekOrder=['seg','ter','qua','qui','sex','sab']
@@ -159,10 +140,14 @@ const cta = h.reservado ? '' : `
 
 /* ===== Footer year ===== */
 const y = el('#year'); if (y) y.textContent = new Date().getFullYear()
-
 // Preenche link do trial nos botões do hero, se existir
 const btnTrialHero = el('#btn-trial-hero');
 if (btnTrialHero) btnTrialHero.href = LINKS.trial;
+
+
+// nav (se adicionou o botão no menu)
+const btnTrialNav = document.getElementById('btn-trial-nav');
+if (btnTrialNav) btnTrialNav.href = LINKS.trial;
 
 
 /* ===== Smooth scroll + active menu ===== */
@@ -203,7 +188,6 @@ if (blobs.length){
     })
   }, {passive:true})
 }
-
 
 /* ===== Awards (premiações) ===== */
 const AWARDS = [
