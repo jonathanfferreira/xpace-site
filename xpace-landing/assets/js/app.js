@@ -93,7 +93,7 @@ const HORARIOS = [
 const tWrap = el('#teachers-target')
 if (tWrap){
   TEACHERS.forEach(t => {
-    const imgSrc = t.photo ? `assets/images/teachers/${t.photo}` : `https://unavatar.io/instagram/${t.ig}`
+    const imgSrc = t.photo ? t.photo : `https://unavatar.io/instagram/${t.ig}`
     const card = $(`<li class="teacher-card reveal">
       <img src="${imgSrc}" alt="Foto de ${t.name}">
       <div class="info">
