@@ -140,10 +140,10 @@ const cta = h.reservado ? '' : `
 
 /* ===== Footer year ===== */
 const y = el('#year'); if (y) y.textContent = new Date().getFullYear()
-
-// hero
-const btnTrialHero = document.getElementById('btn-trial-hero');
+// Preenche link do trial nos botões do hero, se existir
+const btnTrialHero = el('#btn-trial-hero');
 if (btnTrialHero) btnTrialHero.href = LINKS.trial;
+
 
 // nav (se adicionou o botão no menu)
 const btnTrialNav = document.getElementById('btn-trial-nav');
@@ -188,6 +188,7 @@ if (blobs.length){
     })
   }, {passive:true})
 }
+
 /* ===== Awards (premiações) ===== */
 const AWARDS = [
   // Exemplo de item (me manda a lista que eu preencho):
