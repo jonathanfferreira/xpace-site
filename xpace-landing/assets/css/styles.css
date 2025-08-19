@@ -81,3 +81,4 @@ h2{font-size:28px;margin:0 0 16px 0}
 /* Reveal animation */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .reveal.show{opacity:1;transform:none}
+
