@@ -30,12 +30,13 @@ a:hover{opacity:.9}
 .mt-sm{margin-top:8px} .mt{margin-top:16px} .block{display:block}
 
 .site-header{position:sticky;top:0;z-index:50;background:rgba(12,12,15,.6);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.site-header .container{gap:10px}
 .logo{display:flex;align-items:center;gap:10px}
 .logo .brand{line-height:1; font-weight:700; font-size:12px; letter-spacing:.4px}
 .menu{display:flex;gap:14px;align-items:center}
-.menu a{padding:10px 8px;border-radius:10px}
+.menu a{padding:10px 8px;border-radius:10px;white-space:nowrap}
 .burger{display:none;width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid var(--line)}
-#btn-matriculas{white-space:nowrap}
+#btn-matriculas{margin-left:6px}
 
 @media (max-width:960px){
   .menu{display:none;position:absolute;top:64px;left:0;right:0;background:var(--panel);border-bottom:1px solid var(--line);padding:12px;flex-direction:column}
@@ -68,3 +69,7 @@ h2{font-size:28px;margin:0 0 16px 0}
 .day li:first-child{border-top:0}
 
 .site-footer{padding:24px 0;border-top:1px solid var(--line)}
+
+/* Reveal animation */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.show{opacity:1;transform:none}
