@@ -77,7 +77,7 @@ const AWARDS = [
   TEACHERS.forEach(t=>{
     const img = `https://unavatar.io/instagram/${t.ig}`;
     const card = $h(`
-      <li class="teacher-card">
+      <li class="teacher-card reveal">
         <img src="${img}" alt="${t.name}">
         <div>
           <strong>${t.name}</strong>
@@ -98,7 +98,7 @@ const AWARDS = [
   weekOrder.forEach(dia=>{
     const items = HORARIOS.filter(h=>h.dias.includes(dia)).sort((a,b)=>a.hora.localeCompare(b.hora));
     if (!items.length) return;
-    const col = $h(`<div class="day"><h3>${weekName[dia]}</h3><ul></ul></div>`);
+    const col = $h(`<div class="day reveal"><h3>${weekName[dia]}</h3><ul></ul></div>`);
     const list = col.querySelector('ul');
     items.forEach(h=>{
       const tag = h.reservado ? '🔒 Reservado' : (h.faixa || '');
@@ -111,7 +111,7 @@ const AWARDS = [
           </a>
         </div>`;
       const li = $h(`
-        <li>
+        <li class="reveal">
           <div class="row"><b>${h.hora}</b> • ${h.dur || 60} min</div>
           <div class="muted small">${h.modalidade} • ${h.grupo} • ${h.nivel} ${tag?`• ${tag}`:''}</div>
           <div class="muted small">Professor(a): ${h.professor}</div>
@@ -129,7 +129,7 @@ const AWARDS = [
   const wrap = $('#plans-target'); if (!wrap) return;
   PLANS.forEach(p=>{
     const card = $h(`
-      <li class="card" style="${p.featured?'border-color: rgba(167,139,250,.6); box-shadow: var(--shadow);':''}">
+      <li class="card reveal" style="${p.featured?'border-color: rgba(167,139,250,.6); box-shadow: var(--shadow);':''}">
         <strong>${p.title}</strong>
         <div class="muted mt-sm">${p.price}</div>
         <div class="mt">
@@ -147,7 +147,7 @@ const AWARDS = [
   AWARDS.forEach(a=>{
     const note = a.note ? `<div class="muted small mt-sm">${a.note}</div>` : '';
     wrap.append($h(`
-      <li class="card">
+      <li class="card reveal" style="border-left:4px solid var(--primary)">
         <strong>${a.year} — ${a.title}</strong>
         <div class="mt-sm">${a.desc}</div>
         ${note}
