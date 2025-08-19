@@ -1,7 +1,15 @@
-:root{
+:root,
+body.theme-dark{
   --bg:#0c0c0f; --panel:#121216; --text:#f3f3f5; --muted:#b9b9c6; --line:rgba(255,255,255,.08);
   --primary:#a78bfa; --secondary:#f97316; --accent:#7c3aed;
   --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.35);
+  --font:"SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body.theme-light{
+  --bg:#fdfdfd; --panel:#ffffff; --text:#0c0c0f; --muted:#4b4b5c; --line:rgba(0,0,0,.1);
+  --primary:#a78bfa; --secondary:#f97316; --accent:#7c3aed;
+  --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.1);
   --font:"SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Inter", "Segoe UI", Roboto, Arial, sans-serif;
 }
 *{box-sizing:border-box}
