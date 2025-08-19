@@ -4,8 +4,10 @@
   --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.35);
   --font:-apple-system, system-ui, "Inter", "SF Pro Display", Segoe UI, Roboto, Arial, sans-serif;
 }
-*{box-sizing:border-box} html,body{margin:0;padding:0;color:var(--text);background:var(--bg);font-family:var(--font)}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;color:var(--text);background:var(--bg);font-family:var(--font)}
 img{max-width:100%;display:block}
+
 .container{max-width:1160px;margin:0 auto;padding:0 20px}
 .row-between{display:flex;justify-content:space-between;align-items:center;gap:16px}
 .row{display:flex;gap:12px;align-items:center}
@@ -29,13 +31,15 @@ a:hover{opacity:.9}
 .muted{color:var(--muted)}
 .mt-sm{margin-top:8px} .mt{margin-top:16px} .block{display:block}
 
+/* Header */
 .site-header{position:sticky;top:0;z-index:50;background:rgba(12,12,15,.6);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.site-header .container{gap:10px}
 .logo{display:flex;align-items:center;gap:10px}
-.logo .brand{line-height:1; font-weight:700; font-size:12px; letter-spacing:.4px}
+.logo .brand{line-height:1;font-weight:700;font-size:12px;letter-spacing:.4px}
 .menu{display:flex;gap:14px;align-items:center}
-.menu a{padding:10px 8px;border-radius:10px}
+.menu a{padding:10px 8px;border-radius:10px;white-space:nowrap}
 .burger{display:none;width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid var(--line)}
-#btn-matriculas{white-space:nowrap}
+#btn-matriculas{white-space:nowrap;margin-left:6px}
 
 @media (max-width:960px){
   .menu{display:none;position:absolute;top:64px;left:0;right:0;background:var(--panel);border-bottom:1px solid var(--line);padding:12px;flex-direction:column}
@@ -43,6 +47,7 @@ a:hover{opacity:.9}
   .menu.open{display:flex}
 }
 
+/* Hero */
 .hero{padding:96px 0 48px 0}
 .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:34px}
 .hero-copy h1{font-size:56px;line-height:1.02;margin:6px 0 10px}
@@ -53,20 +58,24 @@ a:hover{opacity:.9}
 .media-placeholder{width:100%;height:320px;border-radius:var(--radius);border:1px solid var(--line);background:#111;box-shadow:var(--shadow)}
 @media (max-width:960px){ .hero-grid{grid-template-columns:1fr} .hero-copy h1{font-size:44px} }
 
+/* Sections */
 .section{padding:56px 0;border-top:1px solid var(--line)}
 h2{font-size:28px;margin:0 0 16px 0}
 .card{padding:16px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.03)}
 
+/* Professores */
 .list-plain{list-style:none;margin:0;padding:0}
 .teacher-card{display:flex;gap:12px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)}
 .teacher-card img{width:56px;height:56px;border-radius:50%;border:1px solid var(--line);object-fit:cover}
 
+/* Horários */
 .day{border:1px solid var(--line);border-radius:14px;padding:12px;background:rgba(255,255,255,.02)}
 .day h3{margin:0 0 8px 0;font-size:18px}
 .day ul{list-style:none;margin:0;padding:0}
 .day li{padding:10px;border-top:1px solid var(--line)}
 .day li:first-child{border-top:0}
 
+/* Footer */
 .site-footer{padding:24px 0;border-top:1px solid var(--line)}
 
 /* Reveal animation */
