@@ -234,3 +234,12 @@ const AWARDS = [
     setInterval(()=>{ hi=(hi+1)%HERO_MEDIA.length; apply(); }, 4000);
   }
 })();
+
+/* ===== Loader ===== */
+window.addEventListener('load', ()=>{
+  const bar = $('#top-loader');
+  if (bar){
+    bar.classList.add('hide');
+    setTimeout(()=>bar.remove(),300);
+  }
+});
