@@ -3,6 +3,23 @@ const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 const $h = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstChild; };
 
+/* ===== Reveal on scroll ===== */
+(function initReveal(){
+  if (!('IntersectionObserver' in window)) return;
+  const ro = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('show'); ro.unobserve(e.target); }
+    });
+  },{threshold:.12});
+  // observar itens já na página
+  document.querySelectorAll('.reveal').forEach(n=>ro.observe(n));
+  // observar novos itens inseridos
+  const mo = new MutationObserver(()=>{
+    document.querySelectorAll('.reveal:not(.show)').forEach(n=>ro.observe(n));
+  });
+  mo.observe(document.body, {childList:true, subtree:true});
+})();
+
 /* ===== Links ===== */
 const LINKS = {
   trial: 'https://agendamento.nextfit.com.br/f9b1ea53-0e0e-4f98-9396-3dab7c9fbff4',
@@ -77,7 +94,7 @@ const AWARDS = [
   TEACHERS.forEach(t=>{
     const img = `https://unavatar.io/instagram/${t.ig}`;
     const card = $h(`
-      <li class="teacher-card">
+      <li class="teacher-card reveal">
         <img src="${img}" alt="${t.name}">
         <div>
           <strong>${t.name}</strong>
@@ -111,7 +128,7 @@ const AWARDS = [
           </a>
         </div>`;
       const li = $h(`
-        <li>
+        <li class="reveal">
           <div class="row"><b>${h.hora}</b> • ${h.dur || 60} min</div>
           <div class="muted small">${h.modalidade} • ${h.grupo} • ${h.nivel} ${tag?`• ${tag}`:''}</div>
           <div class="muted small">Professor(a): ${h.professor}</div>
@@ -129,7 +146,7 @@ const AWARDS = [
   const wrap = $('#plans-target'); if (!wrap) return;
   PLANS.forEach(p=>{
     const card = $h(`
-      <li class="card" style="${p.featured?'border-color: rgba(167,139,250,.6); box-shadow: var(--shadow);':''}">
+      <li class="card reveal" style="${p.featured?'border-color: rgba(167,139,250,.6); box-shadow: var(--shadow);':''}">
         <strong>${p.title}</strong>
         <div class="muted mt-sm">${p.price}</div>
         <div class="mt">
@@ -147,7 +164,7 @@ const AWARDS = [
   AWARDS.forEach(a=>{
     const note = a.note ? `<div class="muted small mt-sm">${a.note}</div>` : '';
     wrap.append($h(`
-      <li class="card">
+      <li class="card reveal">
         <strong>${a.year} — ${a.title}</strong>
         <div class="mt-sm">${a.desc}</div>
         ${note}
@@ -195,4 +212,21 @@ const AWARDS = [
   const words = ['ritmos','hip hop','jazz','contemporâneo','heels','dancehall','waacking','house'];
   const rot = $('#word-rotator');
   let i=0; setInterval(()=>{ i=(i+1)%words.length; if(rot){ rot.textContent = words[i]; } }, 2000);
+
+  // mídia do herói (rotaciona imagens simples)
+  const HERO_MEDIA = [
+    // coloque aqui imagens reais quando quiser
+    // 'assets/images/galeria/1.jpg',
+    // 'assets/images/galeria/2.jpg',
+  ];
+  const heroBox = $('#hero-media');
+  if (heroBox && HERO_MEDIA.length){
+    let hi = 0;
+    heroBox.style.backgroundSize = 'cover';
+    heroBox.style.backgroundPosition = 'center';
+    heroBox.style.transition = 'background-image .6s ease';
+    const apply = ()=> heroBox.style.backgroundImage = `url('${HERO_MEDIA[hi]}')`;
+    apply();
+    setInterval(()=>{ hi=(hi+1)%HERO_MEDIA.length; apply(); }, 4000);
+  }
 })();
