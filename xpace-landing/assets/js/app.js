@@ -3,6 +3,28 @@ const $  = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 const $h = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstChild; };
 
+/* ===== Theme toggle ===== */
+(function initTheme(){
+  const storageKey = 'theme';
+  const body = document.body;
+  const btn = document.getElementById('theme-toggle');
+  const apply = (theme) => {
+    body.classList.remove('theme-light','theme-dark');
+    body.classList.add(`theme-${theme}`);
+    if (btn) btn.textContent = theme === 'light' ? '🌙' : '☀️';
+  };
+  let theme = localStorage.getItem(storageKey);
+  if (!theme){
+    theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+  apply(theme);
+  btn?.addEventListener('click', ()=>{
+    theme = body.classList.contains('theme-light') ? 'dark' : 'light';
+    apply(theme);
+    localStorage.setItem(storageKey, theme);
+  });
+})();
+
 /* ===== Reveal on scroll ===== */
 (function initReveal(){
   if (!('IntersectionObserver' in window)) return;
