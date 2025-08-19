@@ -130,14 +130,20 @@ const AWARDS = [
 })();
 
 /* ===== Render: Horários ===== */
-(function renderSchedule(){
+function renderHorarios(){
   const sWrap = $('#schedule-target'); if (!sWrap) return;
+  sWrap.innerHTML = '';
   const weekOrder=['seg','ter','qua','qui','sex','sab'];
   const weekName={seg:'Segunda',ter:'Terça',qua:'Quarta',qui:'Quinta',sex:'Sexta',sab:'Sábado'};
+  const diaSel = $('#filter-dia')?.value || '';
+  const modSel = $('#filter-modalidade')?.value || '';
   weekOrder.forEach(dia=>{
-    const items = HORARIOS.filter(h=>h.dias.includes(dia)).sort((a,b)=>a.hora.localeCompare(b.hora));
+    if (diaSel && dia !== diaSel) return;
+    const items = HORARIOS
+      .filter(h=>h.dias.includes(dia) && (!modSel || h.modalidade === modSel))
+      .sort((a,b)=>a.hora.localeCompare(b.hora));
     if (!items.length) return;
-    const col = $h(`<div class="day reveal"><h3>${weekName[dia]}</h3><ul></ul></div>`);
+    const col = $h(`<div class="day reveal" data-dia="${dia}"><h3>${weekName[dia]}</h3><ul></ul></div>`);
     const list = col.querySelector('ul');
     items.forEach(h=>{
       const tag = h.reservado ? '🔒 Reservado' : (h.faixa || '');
@@ -150,7 +156,7 @@ const AWARDS = [
           </a>
         </div>`;
       const li = $h(`
-        <li class="reveal">
+        <li class="reveal" data-modalidade="${h.modalidade}">
           <div class="row"><b>${h.hora}</b> • ${h.dur || 60} min</div>
           <div class="muted small">${h.modalidade} • ${h.grupo} • ${h.nivel} ${tag?`• ${tag}`:''}</div>
           <div class="muted small">Professor(a): ${h.professor}</div>
@@ -161,7 +167,7 @@ const AWARDS = [
     });
     sWrap.append(col);
   });
-})();
+}
 
 /* ===== Render: Planos ===== */
 (function renderPlans(){
@@ -211,6 +217,26 @@ const AWARDS = [
   $('#link-whats')?.setAttribute('href', LINKS.whats);
   if ($('#link-whats')) $('#link-whats').textContent = '+55 47 99946‑3474';
   $('#btn-matriculas')?.setAttribute('href', LINKS.matriculas);
+
+  // filtros de horários
+  const fDia = $('#filter-dia');
+  const fMod = $('#filter-modalidade');
+  try {
+    const sd = localStorage.getItem('filterDia');
+    const sm = localStorage.getItem('filterModalidade');
+    if (fDia && sd) fDia.value = sd;
+    if (fMod && sm) fMod.value = sm;
+  } catch(e) {}
+  fDia?.addEventListener('change', ()=>{
+    try { localStorage.setItem('filterDia', fDia.value); } catch(e) {}
+    renderHorarios();
+  });
+  fMod?.addEventListener('change', ()=>{
+    try { localStorage.setItem('filterModalidade', fMod.value); } catch(e) {}
+    renderHorarios();
+  });
+
+  renderHorarios();
 
   // menu mobile
   const burger = document.querySelector('.burger');
