@@ -1,5 +1,5 @@
 /* ===== Helpers ===== */
-const $ = (sel) => document.querySelector(sel);
+const $  = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 const $h = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstChild; };
 
@@ -8,7 +8,7 @@ const $h = (html) => { const t = document.createElement('template'); t.innerHTML
   if (!('IntersectionObserver' in window)) return;
   const ro = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
-      if(e.isIntersecting){ e.target.classList.add('show'); ro.unobserve(e.target); }
+      if (e.isIntersecting){ e.target.classList.add('show'); ro.unobserve(e.target); }
     });
   },{threshold:.12});
   // observar itens já na página
@@ -115,7 +115,7 @@ const AWARDS = [
   weekOrder.forEach(dia=>{
     const items = HORARIOS.filter(h=>h.dias.includes(dia)).sort((a,b)=>a.hora.localeCompare(b.hora));
     if (!items.length) return;
-    const col = $h(`<div class="day"><h3>${weekName[dia]}</h3><ul></ul></div>`);
+    const col = $h(`<div class="day reveal"><h3>${weekName[dia]}</h3><ul></ul></div>`);
     const list = col.querySelector('ul');
     items.forEach(h=>{
       const tag = h.reservado ? '🔒 Reservado' : (h.faixa || '');
@@ -164,7 +164,7 @@ const AWARDS = [
   AWARDS.forEach(a=>{
     const note = a.note ? `<div class="muted small mt-sm">${a.note}</div>` : '';
     wrap.append($h(`
-      <li class="card reveal">
+      <li class="card reveal" style="border-left:4px solid var(--primary)">
         <strong>${a.year} — ${a.title}</strong>
         <div class="mt-sm">${a.desc}</div>
         ${note}
@@ -184,7 +184,7 @@ const AWARDS = [
   $('#btn-trial-card')?.setAttribute('href', LINKS.trial);
   $('#btn-whats-hero')?.setAttribute('href', LINKS.whats);
   $('#link-whats')?.setAttribute('href', LINKS.whats);
-  $('#link-whats') && ($('#link-whats').textContent = '+55 47 99946‑3474');
+  if ($('#link-whats')) $('#link-whats').textContent = '+55 47 99946‑3474';
   $('#btn-matriculas')?.setAttribute('href', LINKS.matriculas);
 
   // menu mobile
@@ -204,18 +204,19 @@ const AWARDS = [
       if (!tgt) return;
       const top = tgt.getBoundingClientRect().top + window.scrollY - 72;
       window.scrollTo({top, behavior:'smooth'});
-      menu.classList.remove('open'); burger.setAttribute('aria-expanded','false');
+      menu.classList.remove('open');
+      burger && burger.setAttribute('aria-expanded','false');
     });
   });
 
   // word rotator (ritmos -> estilos)
   const words = ['ritmos','hip hop','jazz','contemporâneo','heels','dancehall','waacking','house'];
   const rot = $('#word-rotator');
-  let i=0; setInterval(()=>{ i=(i+1)%words.length; if(rot){ rot.textContent = words[i]; } }, 2000);
+  let i=0;
+  setInterval(()=>{ i=(i+1)%words.length; if(rot){ rot.textContent = words[i]; } }, 2000);
 
-  // mídia do herói (rotaciona imagens simples)
+  // mídia do herói (rotaciona imagens simples) — preencha quando tiver assets
   const HERO_MEDIA = [
-    // coloque aqui imagens reais quando quiser
     // 'assets/images/galeria/1.jpg',
     // 'assets/images/galeria/2.jpg',
   ];
