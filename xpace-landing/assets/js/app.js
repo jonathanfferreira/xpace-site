@@ -1,7 +1,24 @@
 /* ===== Helpers ===== */
-const $ = (sel) => document.querySelector(sel);
+const $  = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 const $h = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstChild; };
+
+/* ===== Reveal on scroll ===== */
+(function initReveal(){
+  if (!('IntersectionObserver' in window)) return;
+  const ro = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if (e.isIntersecting){ e.target.classList.add('show'); ro.unobserve(e.target); }
+    });
+  },{threshold:.12});
+  // observar itens já na página
+  document.querySelectorAll('.reveal').forEach(n=>ro.observe(n));
+  // observar novos itens inseridos
+  const mo = new MutationObserver(()=>{
+    document.querySelectorAll('.reveal:not(.show)').forEach(n=>ro.observe(n));
+  });
+  mo.observe(document.body, {childList:true, subtree:true});
+})();
 
 /* ===== Links ===== */
 const LINKS = {
@@ -167,7 +184,7 @@ const AWARDS = [
   $('#btn-trial-card')?.setAttribute('href', LINKS.trial);
   $('#btn-whats-hero')?.setAttribute('href', LINKS.whats);
   $('#link-whats')?.setAttribute('href', LINKS.whats);
-  $('#link-whats') && ($('#link-whats').textContent = '+55 47 99946‑3474');
+  if ($('#link-whats')) $('#link-whats').textContent = '+55 47 99946‑3474';
   $('#btn-matriculas')?.setAttribute('href', LINKS.matriculas);
 
   // menu mobile
@@ -187,12 +204,30 @@ const AWARDS = [
       if (!tgt) return;
       const top = tgt.getBoundingClientRect().top + window.scrollY - 72;
       window.scrollTo({top, behavior:'smooth'});
-      menu.classList.remove('open'); burger.setAttribute('aria-expanded','false');
+      menu.classList.remove('open');
+      burger && burger.setAttribute('aria-expanded','false');
     });
   });
 
   // word rotator (ritmos -> estilos)
   const words = ['ritmos','hip hop','jazz','contemporâneo','heels','dancehall','waacking','house'];
   const rot = $('#word-rotator');
-  let i=0; setInterval(()=>{ i=(i+1)%words.length; if(rot){ rot.textContent = words[i]; } }, 2000);
+  let i=0;
+  setInterval(()=>{ i=(i+1)%words.length; if(rot){ rot.textContent = words[i]; } }, 2000);
+
+  // mídia do herói (rotaciona imagens simples) — preencha quando tiver assets
+  const HERO_MEDIA = [
+    // 'assets/images/galeria/1.jpg',
+    // 'assets/images/galeria/2.jpg',
+  ];
+  const heroBox = $('#hero-media');
+  if (heroBox && HERO_MEDIA.length){
+    let hi = 0;
+    heroBox.style.backgroundSize = 'cover';
+    heroBox.style.backgroundPosition = 'center';
+    heroBox.style.transition = 'background-image .6s ease';
+    const apply = ()=> heroBox.style.backgroundImage = `url('${HERO_MEDIA[hi]}')`;
+    apply();
+    setInterval(()=>{ hi=(hi+1)%HERO_MEDIA.length; apply(); }, 4000);
+  }
 })();
