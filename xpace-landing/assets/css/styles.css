@@ -21,7 +21,7 @@ img{max-width:100%;display:block}
 a{color:var(--text);text-decoration:none}
 a:hover{opacity:.9}
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border:1px solid var(--line);
-  border-radius:999px;background:rgba(255,255,255,.04);backdrop-filter:blur(8px);transition:.2s}
+  border-radius:999px;background:rgba(255,255,255,.04);backdrop-filter:blur(8px);transition:background .25s,color .25s,box-shadow .25s}
 .btn.primary{background:linear-gradient(90deg,var(--primary),var(--accent));border:0;color:#fff;box-shadow:var(--shadow)}
 .btn.ghost{background:transparent}
 .btn.small{padding:8px 12px;font-size:14px}
@@ -93,10 +93,31 @@ h2{font-size:28px;margin:0 0 16px 0}
 .site-footer{padding:24px 0;border-top:1px solid var(--line)}
 
 /* Reveal animation */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal{opacity:0;transform:translateY(24px) scale(.98);transition:opacity .6s cubic-bezier(.43,0,.36,1),transform .7s cubic-bezier(.43,0,.36,1);will-change:opacity,transform}
 .reveal.show{opacity:1;transform:none}
 
 /* Loader */
 #top-loader{position:fixed;top:0;left:0;width:100%;height:4px;z-index:100;background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent));background-size:200% 100%;animation:loader 1s linear infinite;pointer-events:none;transition:opacity .3s}
 #top-loader.hide{opacity:0}
 @keyframes loader{from{background-position:0 0}to{background-position:200% 0}}
+
+/* Button hover gradient & pulse */
+.btn.primary:hover,
+.btn.primary:focus{background:linear-gradient(90deg,var(--secondary),var(--accent),var(--primary));color:#fff;box-shadow:0 4px 24px rgba(124,58,237,.13),0 1.5px 12px rgba(34,211,238,.11)}
+
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(124,58,237,.19)}70%{box-shadow:0 0 0 12px rgba(124,58,237,0)}100%{box-shadow:0 0 0 0 rgba(124,58,237,0)}}
+.btn.cta-pulse{animation:pulse 1.8s infinite}
+
+/* Hover on cards */
+.teacher-card,.card{transition:transform .22s cubic-bezier(.22,.61,.36,1),box-shadow .18s}
+.teacher-card:hover,.card:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 8px 28px rgba(34,211,238,.10),0 2px 16px rgba(124,58,237,.09);z-index:1}
+
+/* Fade utilities */
+.fade-in{opacity:0;animation:fadeIn .7s forwards}
+@keyframes fadeIn{to{opacity:1}}
+.fade-out{opacity:1;animation:fadeOut .7s forwards}
+@keyframes fadeOut{to{opacity:0}}
+
+/* Blob background animation */
+.blob{transition:background 1s cubic-bezier(.86,0,.07,1);animation:blobColor 12s linear infinite alternate}
+@keyframes blobColor{0%{background:radial-gradient(circle at 40% 60%,var(--primary),transparent 80%)}50%{background:radial-gradient(circle at 65% 30%,var(--secondary),transparent 80%)}100%{background:radial-gradient(circle at 60% 70%,var(--accent),transparent 80%)}}
