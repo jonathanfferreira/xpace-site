@@ -212,4 +212,21 @@ const AWARDS = [
   const words = ['ritmos','hip hop','jazz','contemporâneo','heels','dancehall','waacking','house'];
   const rot = $('#word-rotator');
   let i=0; setInterval(()=>{ i=(i+1)%words.length; if(rot){ rot.textContent = words[i]; } }, 2000);
+
+  // mídia do herói (rotaciona imagens simples)
+  const HERO_MEDIA = [
+    // coloque aqui imagens reais quando quiser
+    // 'assets/images/galeria/1.jpg',
+    // 'assets/images/galeria/2.jpg',
+  ];
+  const heroBox = $('#hero-media');
+  if (heroBox && HERO_MEDIA.length){
+    let hi = 0;
+    heroBox.style.backgroundSize = 'cover';
+    heroBox.style.backgroundPosition = 'center';
+    heroBox.style.transition = 'background-image .6s ease';
+    const apply = ()=> heroBox.style.backgroundImage = `url('${HERO_MEDIA[hi]}')`;
+    apply();
+    setInterval(()=>{ hi=(hi+1)%HERO_MEDIA.length; apply(); }, 4000);
+  }
 })();
