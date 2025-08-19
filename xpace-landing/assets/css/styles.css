@@ -92,6 +92,15 @@ h2{font-size:28px;margin:0 0 16px 0}
 /* Footer */
 .site-footer{padding:24px 0;border-top:1px solid var(--line)}
 
+/* Contact form */
+#contact-form{display:flex;flex-direction:column;gap:10px}
+#contact-form label{font-size:14px}
+#contact-form input,#contact-form textarea{padding:10px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.03);color:var(--text)}
+#contact-form textarea{min-height:120px;resize:vertical}
+#form-status{min-height:20px;font-size:14px}
+#form-status.success{color:#4ade80}
+#form-status.error{color:#f87171}
+
 /* Reveal animation */
 .reveal{opacity:0;transform:translateY(24px) scale(.98);transition:opacity .6s cubic-bezier(.43,0,.36,1),transform .7s cubic-bezier(.43,0,.36,1);will-change:opacity,transform}
 .reveal.show{opacity:1;transform:none}

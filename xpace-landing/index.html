@@ -117,6 +117,17 @@
             <a class="btn primary block cta-pulse" id="btn-trial-card" target="_blank" rel="noreferrer">Agendar agora</a>
           </div>
         </div>
+        <form id="contact-form" class="card mt">
+          <h3>Envie uma mensagem</h3>
+          <label for="name">Nome</label>
+          <input type="text" id="name" name="name" required>
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" required>
+          <label for="message">Mensagem</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+          <div id="form-status" class="mt-sm muted"></div>
+          <button type="submit" class="btn primary block mt">Enviar</button>
+        </form>
       </div>
     </section>
   </main>
