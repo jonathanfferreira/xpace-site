@@ -11,11 +11,12 @@ const $h = (html) => { const t = document.createElement('template'); t.innerHTML
       if (e.isIntersecting){ e.target.classList.add('show'); ro.unobserve(e.target); }
     });
   },{threshold:.12});
+  const selector = '.reveal:not(.card):not(.teacher-card):not(.timeline-item)';
   // observar itens já na página
-  document.querySelectorAll('.reveal').forEach(n=>ro.observe(n));
+  document.querySelectorAll(selector).forEach(n=>ro.observe(n));
   // observar novos itens inseridos
   const mo = new MutationObserver(()=>{
-    document.querySelectorAll('.reveal:not(.show)').forEach(n=>ro.observe(n));
+    document.querySelectorAll(`${selector}:not(.show)`).forEach(n=>ro.observe(n));
   });
   mo.observe(document.body, {childList:true, subtree:true});
 })();
@@ -233,6 +234,45 @@ const AWARDS = [
     apply();
     setInterval(()=>{ hi=(hi+1)%HERO_MEDIA.length; apply(); }, 4000);
   }
+})();
+
+/* ===== Animations ===== */
+(function initAnimations(){
+  if (typeof anime === 'undefined') return;
+
+  // Hero section
+  anime({
+    targets: '.hero .hero-copy > *, .hero .hero-media',
+    opacity: [0, 1],
+    translateY: [24, 0],
+    duration: 700,
+    easing: 'cubicBezier(.43,0,.36,1)',
+    delay: anime.stagger(80)
+  });
+
+  // Cards and timeline items
+  if (!('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if (e.isIntersecting){
+        anime({
+          targets: e.target,
+          opacity: [0,1],
+          translateY: [24,0],
+          scale: [0.98,1],
+          duration: 700,
+          easing: 'cubicBezier(.43,0,.36,1)',
+          complete:()=>e.target.classList.remove('reveal')
+        });
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:.15});
+  document.querySelectorAll('.card, .teacher-card, .timeline-item').forEach(el=>{
+    el.style.opacity = 0;
+    el.style.transform = 'translateY(24px) scale(.98)';
+    io.observe(el);
+  });
 })();
 
 /* ===== Loader ===== */
