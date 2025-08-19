@@ -220,15 +220,12 @@ const AWARDS = [
 
   // mídia do herói (rotaciona imagens simples) — preencha quando tiver assets
   const HERO_MEDIA = [
-    // 'assets/images/galeria/1.jpg',
-    // 'assets/images/galeria/2.jpg',
+    'https://picsum.photos/seed/hero1/1280/720',
+    'https://picsum.photos/seed/hero2/1280/720'
   ];
   const heroBox = $('#hero-media');
-  if (heroBox && HERO_MEDIA.length){
+  if (heroBox && HERO_MEDIA.length && !heroBox.querySelector('video')){
     let hi = 0;
-    heroBox.style.backgroundSize = 'cover';
-    heroBox.style.backgroundPosition = 'center';
-    heroBox.style.transition = 'background-image .6s ease';
     const apply = ()=> heroBox.style.backgroundImage = `url('${HERO_MEDIA[hi]}')`;
     apply();
     setInterval(()=>{ hi=(hi+1)%HERO_MEDIA.length; apply(); }, 4000);
