@@ -278,6 +278,42 @@ function renderHorarios(){
     apply();
     setInterval(()=>{ hi=(hi+1)%HERO_MEDIA.length; apply(); }, 4000);
   }
+
+  // contato - envio de formulário
+  const contactForm = $('#contact-form');
+  const formStatus = $('#form-status');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        return;
+      }
+      formStatus.textContent = 'Enviando...';
+      try {
+        const data = new FormData(contactForm);
+        const res = await fetch('https://formspree.io/f/xjkvzvgz', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          formStatus.textContent = 'Mensagem enviada com sucesso!';
+          formStatus.classList.add('success');
+          formStatus.classList.remove('error');
+          contactForm.reset();
+        } else {
+          formStatus.textContent = 'Ocorreu um erro. Tente novamente.';
+          formStatus.classList.add('error');
+          formStatus.classList.remove('success');
+        }
+      } catch (err) {
+        formStatus.textContent = 'Ocorreu um erro. Tente novamente.';
+        formStatus.classList.add('error');
+        formStatus.classList.remove('success');
+      }
+    });
+  }
 })();
 
 /* ===== Loader ===== */
