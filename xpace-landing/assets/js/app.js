@@ -190,13 +190,13 @@ function renderHorarios(){
 (function renderAwards(){
   const wrap = $('#awards-timeline'); if (!wrap) return;
   AWARDS.forEach(a=>{
-    const note = a.note ? `<small class=\"muted block mt-sm\">${a.note}</small>` : '';
+    const note = a.note ? `<small class="muted block mt-sm">${a.note}</small>` : '';
     wrap.append($h(`
-      <div class=\"timeline-item reveal\">
-        <div class=\"timeline-node\">🏆</div>
-        <div class=\"timeline-content\">
+      <div class="timeline-item reveal">
+        <div class="timeline-node">🏆</div>
+        <div class="timeline-content">
           <strong>${a.year} — ${a.title}</strong>
-          <div class=\"mt-sm\">${a.desc}</div>
+          <div class="mt-sm">${a.desc}</div>
           ${note}
         </div>
       </div>
