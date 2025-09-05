@@ -27,19 +27,38 @@ const $h = (html) => { const t = document.createElement('template'); t.innerHTML
 
 /* ===== Reveal on scroll ===== */
 (function initReveal(){
-  if (!('IntersectionObserver' in window)) return;
-  const ro = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if (e.isIntersecting){ e.target.classList.add('show'); ro.unobserve(e.target); }
-    });
-  },{threshold:.12});
-  // observar itens já na página
-  document.querySelectorAll('.reveal').forEach(n=>ro.observe(n));
-  // observar novos itens inseridos
-  const mo = new MutationObserver(()=>{
-    document.querySelectorAll('.reveal:not(.show)').forEach(n=>ro.observe(n));
+  if (typeof gsap === 'undefined') return;
+  if (typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+  }
+  gsap.utils.toArray('.reveal').forEach(el => {
+    const opts = {
+      opacity: 0,
+      y: 40,
+      duration: 0.6,
+      ease: 'power1.out'
+    };
+    if (typeof ScrollTrigger !== 'undefined') {
+      opts.scrollTrigger = {
+        trigger: el,
+        start: 'top 80%',
+        once: true
+      };
+      gsap.from(el, opts);
+    } else if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            gsap.from(e.target, opts);
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      io.observe(el);
+    } else {
+      gsap.from(el, opts);
+    }
   });
-  mo.observe(document.body, {childList:true, subtree:true});
 })();
 
 /* ===== Links ===== */
