@@ -27,18 +27,27 @@ const $h = (html) => { const t = document.createElement('template'); t.innerHTML
 
 /* ===== Reveal on scroll ===== */
 (function initReveal(){
-  if (!('IntersectionObserver' in window)) return;
-  const ro = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if (e.isIntersecting){ e.target.classList.add('show'); ro.unobserve(e.target); }
+  if (typeof gsap === 'undefined') return;
+  if (typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
+
+  const reveal = (el) => {
+    if (el.dataset.revealed) return;
+    el.dataset.revealed = 'true';
+    gsap.from(el, {
+      opacity: 0,
+      y: 40,
+      duration: 0.6,
+      ease: 'power1.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 80%',
+        once: true
+      }
     });
-  },{threshold:.12});
-  // observar itens já na página
-  document.querySelectorAll('.reveal').forEach(n=>ro.observe(n));
-  // observar novos itens inseridos
-  const mo = new MutationObserver(()=>{
-    document.querySelectorAll('.reveal:not(.show)').forEach(n=>ro.observe(n));
-  });
+  };
+
+  gsap.utils.toArray('.reveal').forEach(reveal);
+  const mo = new MutationObserver(()=>gsap.utils.toArray('.reveal').forEach(reveal));
   mo.observe(document.body, {childList:true, subtree:true});
 })();
 
