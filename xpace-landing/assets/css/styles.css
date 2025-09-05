@@ -137,6 +137,13 @@ h2{font-size:28px;margin:0 0 16px 0}
 .fade-out{opacity:1;animation:fadeOut .7s forwards}
 @keyframes fadeOut{to{opacity:0}}
 
+/* Testimonials */
+.testimonials{position:relative}
+.testimonial{text-align:center;display:none}
+.testimonial.active{display:block}
+.testimonial img{width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 12px}
+.testimonial strong{display:block;margin-bottom:8px}
+
 /* Blob background animation */
 .blob{transition:background 1s cubic-bezier(.86,0,.07,1);animation:blobColor 12s linear infinite alternate}
-@keyframes blobColor{0%{background:radial-gradient(circle at 40% 60%,var(--primary),transparent 80%)}50%{background:radial-gradient(circle at 65% 30%,var(--secondary),transparent 80%)}100%{background:radial-gradient(circle at 60% 70%,var(--accent),transparent 80%)}}
+@keyframes blobColor{0%{background:radial-gradient(circle at 40% 60%,var(--primary),transparent 80%)}50%{background:radial-gradient(circle at 65% 30%,var(--secondary),transparent 80%)}100%{background:radial-gradient(circle at 60% 70%,var(--accent),transparent 80%)}} 
