@@ -27,19 +27,34 @@ const $h = (html) => { const t = document.createElement('template'); t.innerHTML
 
 /* ===== Reveal on scroll ===== */
 (function initReveal(){
-  if (!('IntersectionObserver' in window)) return;
-  const ro = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if (e.isIntersecting){ e.target.classList.add('show'); ro.unobserve(e.target); }
+  if (typeof gsap === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  const animate = (targets)=>{
+    gsap.utils.toArray(targets).forEach(el=>{
+      if (el.dataset.gsapReveal) return;
+      gsap.fromTo(el,
+        {opacity: 0, y: 40},
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: 'power1.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 90%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+      el.dataset.gsapReveal = '1';
     });
-  },{threshold:.12});
-  // observar itens já na página
-  document.querySelectorAll('.reveal').forEach(n=>ro.observe(n));
-  // observar novos itens inseridos
-  const mo = new MutationObserver(()=>{
-    document.querySelectorAll('.reveal:not(.show)').forEach(n=>ro.observe(n));
-  });
-  mo.observe(document.body, {childList:true, subtree:true});
+  };
+
+  animate('.reveal');
+
+  const mo = new MutationObserver(()=>animate('.reveal'));
+  mo.observe(document.body, {childList: true, subtree: true});
 })();
 
 /* ===== Links ===== */
