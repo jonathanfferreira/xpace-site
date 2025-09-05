@@ -1,0 +1,31 @@
+[
+  {
+    "title": "2x/semana (Mensal)",
+    "price": "R$ 160/mês"
+  },
+  {
+    "title": "1x/semana (Mensal)",
+    "price": "R$ 120/mês"
+  },
+  {
+    "title": "2x/semana (Semestral 6x)",
+    "price": "R$ 150/mês • 6x"
+  },
+  {
+    "title": "1x/semana (Semestral 6x)",
+    "price": "R$ 110/mês • 6x"
+  },
+  {
+    "title": "2x/semana (Anual 12x)",
+    "price": "R$ 130/mês • 12x",
+    "featured": true
+  },
+  {
+    "title": "1x/semana (Anual 12x)",
+    "price": "R$ 100/mês • 12x"
+  },
+  {
+    "title": "Modalidade adicional",
+    "price": "R$ 90/mês"
+  }
+]
