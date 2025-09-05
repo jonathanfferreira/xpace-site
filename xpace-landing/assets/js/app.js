@@ -269,11 +269,72 @@ function initUI(){
   }
 }
 
+/* ===== Hero background ===== */
+function initHeroBackground(){
+  const canvas = document.getElementById('bg-canvas');
+  if (!canvas || typeof THREE === 'undefined') return;
+
+  const hasWebGL = (()=>{
+    try {
+      const c = document.createElement('canvas');
+      return !!window.WebGLRenderingContext && (
+        c.getContext('webgl') || c.getContext('experimental-webgl')
+      );
+    } catch(e){
+      return false;
+    }
+  })();
+  if (!hasWebGL){
+    canvas.remove();
+    return;
+  }
+
+  const hero = document.querySelector('.hero');
+  if (hero) hero.style.position = 'relative';
+  canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;';
+
+  const renderer = new THREE.WebGLRenderer({canvas,alpha:true});
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 1, 1000);
+  camera.position.z = 400;
+
+  const particles = new THREE.BufferGeometry();
+  const count = 600;
+  const positions = new Float32Array(count * 3);
+  for(let i=0;i<count;i++){
+    positions[i*3]   = (Math.random()*2-1) * 400;
+    positions[i*3+1] = (Math.random()*2-1) * 400;
+    positions[i*3+2] = (Math.random()*2-1) * 400;
+  }
+  particles.setAttribute('position', new THREE.BufferAttribute(positions,3));
+  const material = new THREE.PointsMaterial({color:0xffffff, size:2});
+  const points = new THREE.Points(particles, material);
+  scene.add(points);
+
+  function animate(){
+    requestAnimationFrame(animate);
+    points.rotation.y += 0.0008;
+    points.rotation.x += 0.0005;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', ()=>{
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+}
+
 loadData().then(()=>{
   renderTeachers();
   renderPlans();
   renderAwards();
   initUI();
+  initHeroBackground();
 });
 
 /* ===== Loader ===== */
