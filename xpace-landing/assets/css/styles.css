@@ -73,6 +73,11 @@ a:hover{opacity:.9}
 h2{font-size:28px;margin:0 0 16px 0}
 .card{padding:16px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.03)}
 
+/* Vertentes */
+.vert-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px}
+.vert-card .icon{font-size:40px;margin-bottom:8px}
+.grad-title{background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;background-clip:text;color:transparent}
+
 /* Professores */
 .list-plain{list-style:none;margin:0;padding:0}
 .teacher-card{display:flex;gap:12px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)}
