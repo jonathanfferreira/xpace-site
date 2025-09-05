@@ -114,7 +114,7 @@ const AWARDS = [
     const img = `https://unavatar.io/instagram/${t.ig}`;
     const card = $h(`
       <li class="teacher-card reveal">
-        <img src="${img}" alt="${t.name}">
+        <img src="${img}" alt="${t.name}" loading="lazy">
         <div>
           <strong>${t.name}</strong>
           <div class="muted small">${t.styles.join(' • ')}</div>
