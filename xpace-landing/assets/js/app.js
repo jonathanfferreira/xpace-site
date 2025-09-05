@@ -43,11 +43,8 @@ const $h = (html) => { const t = document.createElement('template'); t.innerHTML
 })();
 
 /* ===== Links ===== */
-const LINKS = {
-  trial: 'https://agendamento.nextfit.com.br/f9b1ea53-0e0e-4f98-9396-3dab7c9fbff4',
-  whats: 'https://wa.me/5547999463474?text=' + encodeURIComponent('Olá! Quero informações sobre matrículas na XPACE.'),
-  matriculas: 'https://venda.nextfit.com.br/54a0cf4a-176f-46d3-b552-aad35019a4ff/contratos'
-};
+const linkTrial = $('#btn-trial-nav')?.dataset.href || '';
+const linkMatriculas = $('#btn-matriculas')?.dataset.href || '';
 
 /* ===== Dados: Professores ===== */
 const TEACHERS = [
@@ -149,7 +146,7 @@ function renderHorarios(){
       const tag = h.reservado ? '🔒 Reservado' : (h.faixa || '');
       const cta = h.reservado ? '' : `
         <div class="mt">
-          <a class="btn small" target="_blank" rel="noreferrer" href="${LINKS.trial}">Agendar experimental</a>
+          <a class="btn small" target="_blank" rel="noreferrer" href="${linkTrial}">Agendar experimental</a>
           <a class="btn small ghost" target="_blank" rel="noreferrer"
              href="https://wa.me/5547999463474?text=${encodeURIComponent(`Olá! Quero reservar vaga em ${h.modalidade} • ${h.grupo} • ${h.nivel} (${weekName[dia]} ${h.hora}).`)}">
              WhatsApp
@@ -178,7 +175,7 @@ function renderHorarios(){
         <strong>${p.title}</strong>
         <div class="muted mt-sm">${p.price}</div>
         <div class="mt">
-          <a class="btn small primary" href="${LINKS.matriculas}" target="_blank" rel="noreferrer">Assinar</a>
+          <a class="btn small primary" href="${linkMatriculas}" target="_blank" rel="noreferrer">Assinar</a>
         </div>
       </li>
     `);
@@ -210,13 +207,11 @@ function renderHorarios(){
   const y = $('#year'); if (y) y.textContent = new Date().getFullYear();
 
   // links
-  $('#btn-trial-nav')?.setAttribute('href', LINKS.trial);
-  $('#btn-trial-hero')?.setAttribute('href', LINKS.trial);
-  $('#btn-trial-card')?.setAttribute('href', LINKS.trial);
-  $('#btn-whats-hero')?.setAttribute('href', LINKS.whats);
-  $('#link-whats')?.setAttribute('href', LINKS.whats);
+  ['btn-trial-nav','btn-trial-hero','btn-trial-card','btn-whats-hero','link-whats','btn-matriculas'].forEach(id=>{
+    const el = document.getElementById(id);
+    if (el?.dataset.href) el.setAttribute('href', el.dataset.href);
+  });
   if ($('#link-whats')) $('#link-whats').textContent = '+55 47 99946‑3474';
-  $('#btn-matriculas')?.setAttribute('href', LINKS.matriculas);
 
   // filtros de horários
   const fDia = $('#filter-dia');
