@@ -46,69 +46,27 @@ const $h = (html) => { const t = document.createElement('template'); t.innerHTML
 const linkTrial = $('#btn-trial-nav')?.dataset.href || '';
 const linkMatriculas = $('#btn-matriculas')?.dataset.href || '';
 
-/* ===== Dados: Professores ===== */
-const TEACHERS = [
-  { name: 'Alana Veiga', styles: ['Hip Hop'], ig: 'veigalanaa' },
-  { name: 'Alisson Felipe', styles: ['Hip Hop'], ig: 'alissonfelipes' },
-  { name: 'Alisson Morpheu', styles: ['Locking'], ig: 'alisson_morpheu' },
-  { name: 'Bianca Marcela', styles: ['Contemporâneo','Jazz'], ig: 'biancamarceela' },
-  { name: 'Dil', styles: ['Vogue','Jazz Funk','Waacking','Hip Hop','House'], ig: 'dilschulz' },
-  { name: 'Eduarda Rodrigues', styles: ['Jazz Funk','Heels'], ig: 'eduarda.r.l' },
-  { name: 'Engels', styles: ['Vogue','Waacking','Jazz Funk'], ig: 'engelsmatheus_' },
-  { name: 'Gus', styles: ['Waacking','Jazz Funk','House'], ig: 'gusjoesting' },
-  { name: 'Guilherme Riku', styles: ['Acrobacias'], ig: 'guilhermeriku' },
-  { name: 'Isis', styles: ['Hip Hop'], ig: 'isislkr' },
-  { name: 'Jhonney', styles: ['Hip Hop','Dancehall','Jazz Funk','Waacking'], ig: 'jhonney.xp' },
-  { name: 'Lóren Stefany', styles: ['Hip Hop','House'], ig: 'ftloren' },
-  { name: 'Lucas Maciel', styles: ['Dancehall'], ig: 'lucasmacieldx' },
-  { name: 'Marcelinho', styles: ['Hip Hop'], ig: 'marcelinho_hiphop' },
-  { name: 'Natália Lessin', styles: ['Ritmos'], ig: 'nataliatflessin' },
-  { name: 'Ruan Amorim', styles: ['Hip Hop','House'], ig: 'ruan_amrm' },
-  { name: 'Ruan Santos', styles: ['Hip Hop'], ig: 'ruansanttoz' },
-  { name: 'Samuel Maros', styles: ['Danças Urbanas'], ig: 'samuzek' },
-];
+/* ===== Dados (carregados via JSON) ===== */
+let TEACHERS = [];
+let HORARIOS = [];
+let PLANS = [];
+let AWARDS = [];
 
-/* ===== Dados: Horários ===== */
-const HORARIOS = [
-  { dias:['seg','qua'], hora:'18:00', modalidade:'Contemporâneo', grupo:'Adulto', nivel:'Iniciante', professor:'Bianca Marcela', dur:60 },
-  { dias:['seg','qua'], hora:'19:00', modalidade:'Danças Urbanas', grupo:'Infantil', nivel:'Iniciante', professor:'Ruan Amorim', extras:['Lóren Stefany','Jhonney'], faixa:'Infantil 5–11', dur:60 },
-  { dias:['seg','qua'], hora:'20:00', modalidade:'Danças Urbanas', grupo:'Sênior', nivel:'Avançado (aberto)', professor:'Equipe XPACE (escala)', dur:60 },
-  { dias:['seg','qua'], hora:'21:00', modalidade:'Jazz', grupo:'Adulto', nivel:'Intermediário', professor:'Bianca Marcela', dur:60 },
-
-  { dias:['ter','qui'], hora:'18:30', modalidade:'Ritmos', grupo:'Adulto', nivel:'Iniciante', professor:'Natália Lessin', dur:45 },
-  { dias:['ter','qui'], hora:'19:15', modalidade:'Danças Urbanas', grupo:'Júnior', nivel:'Avançado (aberto)', professor:'Equipe XPACE (escala)', dur:60 },
-  { dias:['ter','qui'], hora:'20:15', modalidade:'Acrobacias', grupo:'Adulto', nivel:'Iniciante', professor:'Guilherme Riku', dur:60 },
-  { dias:['ter','qui'], hora:'21:15', modalidade:'Dança de Salão', grupo:'Adulto', nivel:'Iniciante', professor:'Professor a definir', dur:60 },
-
-  { dias:['sex'], hora:'19:00', modalidade:'Danças Urbanas', grupo:'Adulto', nivel:'Iniciante', professor:'Ruan Amorim (apoio Jhonney)', dur:60 },
-  { dias:['sex'], hora:'20:30', modalidade:'Ensaio CIA', grupo:'Companhia', nivel:'Reservado', professor:'—', dur:90, reservado:true },
-
-  { dias:['sab'], hora:'09:00', modalidade:'Jazz Funk', grupo:'Adulto', nivel:'Iniciante', professor:'Eduarda Rodrigues', dur:60 },
-  { dias:['sab'], hora:'10:00', modalidade:'Danças Urbanas', grupo:'Adulto', nivel:'Intermediário', professor:'Samuel Maros (apoio Jhonney/Ruan Amorim)', dur:60 },
-  { dias:['sab'], hora:'11:00', modalidade:'Heels', grupo:'Adulto', nivel:'Iniciante', professor:'Eduarda Rodrigues', dur:60 },
-];
-
-/* ===== Dados: Planos ===== */
-const PLANS = [
-  { title:'2x/semana (Mensal)', price:'R$ 160/mês' },
-  { title:'1x/semana (Mensal)', price:'R$ 120/mês' },
-  { title:'2x/semana (Semestral 6x)', price:'R$ 150/mês • 6x' },
-  { title:'1x/semana (Semestral 6x)', price:'R$ 110/mês • 6x' },
-  { title:'2x/semana (Anual 12x)', price:'R$ 130/mês • 12x', featured:true },
-  { title:'1x/semana (Anual 12x)', price:'R$ 100/mês • 12x' },
-  { title:'Modalidade adicional', price:'R$ 90/mês' },
-];
-
-/* ===== Dados: Premiações ===== */
-const AWARDS = [
-  { year:2024, title:'Hip Hop Unite Brasil', desc:'🥇 Duo Júnior • 🥇 Small Crew Cadet • 🥈 Small Crew Júnior' },
-  { year:2025, title:'Hip Hop Unite Brasil', desc:'🥇 Duo Cadet • 🥇 Duo Júnior • 🥇 Small Crew Cadet', note:'Seleção Brasileira de Hip Hop (HHU).' },
-  { year:2025, title:'Festival Internacional de Hip Hop (FIH2)', desc:'🥈 Small Crew — Categoria Avançada', note:'Único grupo de Joinville a conquistar o 2º lugar no Avançado.' },
-  { year:2025, title:'Festival de Dança de Joinville', desc:'🥈 Solo Masculino Sênior (Marcelinho) • ✅ 3 coreografias autorais aprovadas', note:'Feito inédito para grupos urbanos de Joinville.' },
-];
+async function loadData(){
+  const [teachers, horarios, plans, awards] = await Promise.all([
+    fetch('assets/data/teachers.json').then(r=>r.json()),
+    fetch('assets/data/horarios.json').then(r=>r.json()),
+    fetch('assets/data/plans.json').then(r=>r.json()),
+    fetch('assets/data/awards.json').then(r=>r.json()),
+  ]);
+  TEACHERS = teachers;
+  HORARIOS = horarios;
+  PLANS = plans;
+  AWARDS = awards;
+}
 
 /* ===== Render: Professores ===== */
-(function renderTeachers(){
+function renderTeachers(){
   const wrap = $('#teachers-target'); if (!wrap) return;
   TEACHERS.forEach(t=>{
     const img = `https://unavatar.io/instagram/${t.ig}`;
@@ -124,7 +82,7 @@ const AWARDS = [
     `);
     wrap.append(card);
   });
-})();
+}
 
 /* ===== Render: Horários ===== */
 function renderHorarios(){
@@ -167,7 +125,7 @@ function renderHorarios(){
 }
 
 /* ===== Render: Planos ===== */
-(function renderPlans(){
+function renderPlans(){
   const wrap = $('#plans-target'); if (!wrap) return;
   PLANS.forEach(p=>{
     const card = $h(`
@@ -181,10 +139,10 @@ function renderHorarios(){
     `);
     wrap.append(card);
   });
-})();
+}
 
 /* ===== Render: Premiações ===== */
-(function renderAwards(){
+function renderAwards(){
   const wrap = $('#awards-timeline'); if (!wrap) return;
   AWARDS.forEach(a=>{
     const note = a.note ? `<small class="muted block mt-sm">${a.note}</small>` : '';
@@ -199,10 +157,10 @@ function renderHorarios(){
       </div>
     `));
   });
-})();
+}
 
 /* ===== Interações ===== */
-(function initUI(){
+function initUI(){
   // ano no rodapé
   const y = $('#year'); if (y) y.textContent = new Date().getFullYear();
 
@@ -309,7 +267,14 @@ function renderHorarios(){
       }
     });
   }
-})();
+}
+
+loadData().then(()=>{
+  renderTeachers();
+  renderPlans();
+  renderAwards();
+  initUI();
+});
 
 /* ===== Loader ===== */
 window.addEventListener('load', ()=>{

@@ -1,0 +1,159 @@
+[
+  {
+    "dias": [
+      "seg",
+      "qua"
+    ],
+    "hora": "18:00",
+    "modalidade": "Contemporâneo",
+    "grupo": "Adulto",
+    "nivel": "Iniciante",
+    "professor": "Bianca Marcela",
+    "dur": 60
+  },
+  {
+    "dias": [
+      "seg",
+      "qua"
+    ],
+    "hora": "19:00",
+    "modalidade": "Danças Urbanas",
+    "grupo": "Infantil",
+    "nivel": "Iniciante",
+    "professor": "Ruan Amorim",
+    "extras": [
+      "Lóren Stefany",
+      "Jhonney"
+    ],
+    "faixa": "Infantil 5–11",
+    "dur": 60
+  },
+  {
+    "dias": [
+      "seg",
+      "qua"
+    ],
+    "hora": "20:00",
+    "modalidade": "Danças Urbanas",
+    "grupo": "Sênior",
+    "nivel": "Avançado (aberto)",
+    "professor": "Equipe XPACE (escala)",
+    "dur": 60
+  },
+  {
+    "dias": [
+      "seg",
+      "qua"
+    ],
+    "hora": "21:00",
+    "modalidade": "Jazz",
+    "grupo": "Adulto",
+    "nivel": "Intermediário",
+    "professor": "Bianca Marcela",
+    "dur": 60
+  },
+  {
+    "dias": [
+      "ter",
+      "qui"
+    ],
+    "hora": "18:30",
+    "modalidade": "Ritmos",
+    "grupo": "Adulto",
+    "nivel": "Iniciante",
+    "professor": "Natália Lessin",
+    "dur": 45
+  },
+  {
+    "dias": [
+      "ter",
+      "qui"
+    ],
+    "hora": "19:15",
+    "modalidade": "Danças Urbanas",
+    "grupo": "Júnior",
+    "nivel": "Avançado (aberto)",
+    "professor": "Equipe XPACE (escala)",
+    "dur": 60
+  },
+  {
+    "dias": [
+      "ter",
+      "qui"
+    ],
+    "hora": "20:15",
+    "modalidade": "Acrobacias",
+    "grupo": "Adulto",
+    "nivel": "Iniciante",
+    "professor": "Guilherme Riku",
+    "dur": 60
+  },
+  {
+    "dias": [
+      "ter",
+      "qui"
+    ],
+    "hora": "21:15",
+    "modalidade": "Dança de Salão",
+    "grupo": "Adulto",
+    "nivel": "Iniciante",
+    "professor": "Professor a definir",
+    "dur": 60
+  },
+  {
+    "dias": [
+      "sex"
+    ],
+    "hora": "19:00",
+    "modalidade": "Danças Urbanas",
+    "grupo": "Adulto",
+    "nivel": "Iniciante",
+    "professor": "Ruan Amorim (apoio Jhonney)",
+    "dur": 60
+  },
+  {
+    "dias": [
+      "sex"
+    ],
+    "hora": "20:30",
+    "modalidade": "Ensaio CIA",
+    "grupo": "Companhia",
+    "nivel": "Reservado",
+    "professor": "—",
+    "dur": 90,
+    "reservado": true
+  },
+  {
+    "dias": [
+      "sab"
+    ],
+    "hora": "09:00",
+    "modalidade": "Jazz Funk",
+    "grupo": "Adulto",
+    "nivel": "Iniciante",
+    "professor": "Eduarda Rodrigues",
+    "dur": 60
+  },
+  {
+    "dias": [
+      "sab"
+    ],
+    "hora": "10:00",
+    "modalidade": "Danças Urbanas",
+    "grupo": "Adulto",
+    "nivel": "Intermediário",
+    "professor": "Samuel Maros (apoio Jhonney/Ruan Amorim)",
+    "dur": 60
+  },
+  {
+    "dias": [
+      "sab"
+    ],
+    "hora": "11:00",
+    "modalidade": "Heels",
+    "grupo": "Adulto",
+    "nivel": "Iniciante",
+    "professor": "Eduarda Rodrigues",
+    "dur": 60
+  }
+]
