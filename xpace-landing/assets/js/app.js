@@ -241,9 +241,9 @@ function renderHorarios(){
   // menu mobile
   const burger = document.querySelector('.burger');
   const menu = document.querySelector('.menu');
-  burger?.addEventListener('click', ()=>{
+  burger?.addEventListener('click', () => {
     const open = menu.classList.toggle('open');
-    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
 
   // smooth scroll
