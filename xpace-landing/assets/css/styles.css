@@ -59,6 +59,7 @@ a:hover{opacity:.9}
 .hero{padding:96px 0 48px 0}
 .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:34px}
 .hero-copy h1{font-size:56px;line-height:1.02;margin:6px 0 10px}
+.hero-copy h1 .break{display:block}
 .hero-copy .tagline{font-size:28px;opacity:.95}
 .grad{background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent));
   -webkit-background-clip:text;background-clip:text;color:transparent}

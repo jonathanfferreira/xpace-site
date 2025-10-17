@@ -72,16 +72,24 @@ let PLANS = [];
 let AWARDS = [];
 
 async function loadData(){
-  const [teachers, horarios, plans, awards] = await Promise.all([
-    fetch('assets/data/teachers.json').then(r=>r.json()),
-    fetch('assets/data/horarios.json').then(r=>r.json()),
-    fetch('assets/data/plans.json').then(r=>r.json()),
-    fetch('assets/data/awards.json').then(r=>r.json()),
-  ]);
-  TEACHERS = teachers;
-  HORARIOS = horarios;
-  PLANS = plans;
-  AWARDS = awards;
+  try {
+    const [teachers, horarios, plans, awards] = await Promise.all([
+      fetch('assets/data/teachers.json').then(r=>r.json()),
+      fetch('assets/data/horarios.json').then(r=>r.json()),
+      fetch('assets/data/plans.json').then(r=>r.json()),
+      fetch('assets/data/awards.json').then(r=>r.json()),
+    ]);
+    TEACHERS = teachers;
+    HORARIOS = horarios;
+    PLANS = plans;
+    AWARDS = awards;
+  } catch (err) {
+    console.error('Erro ao carregar dados', err);
+    TEACHERS = [];
+    HORARIOS = [];
+    PLANS = [];
+    AWARDS = [];
+  }
 }
 
 /* ===== Render: Professores ===== */
@@ -291,7 +299,13 @@ function initUI(){
 /* ===== Hero background ===== */
 function initHeroBackground(){
   const canvas = document.getElementById('bg-canvas');
+  // Skip heavy animation on small screens or when user prefers reduced motion
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!canvas || typeof THREE === 'undefined') return;
+  if (window.innerWidth < 640 || prefersReduced) {
+    canvas.remove();
+    return;
+  }
 
   const hasWebGL = (()=>{
     try {
